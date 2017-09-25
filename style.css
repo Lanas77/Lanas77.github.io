@@ -6,7 +6,13 @@ body {
 
 h1 { 
     text-align: center;
+    border-style: double;
     font-family: fantasy;
     color: #dddddd;
     background-color: #333333;
+}
+
+canvas {
+    margin:auto
+    
 }
