@@ -25,9 +25,21 @@ mainGameState.create = function() {
     game.physics.startSystem(Phaser.Physics.ARCADE); 
     game.physics.arcade.enable(this.playerShip);
     
+    this.cursors = game.input.keyboard.createCursorKeys();
+    
 }
 
 //Add the update function
 mainGameState.update = function() {
+    
+    //move over the canavas
+    
+    if (this.cursors.right.isDown) {
+        this.playerShip.body.velocity.x = -200;
+    } else if (this.cursors.left.isDown) {
+        this.playerShip.body.velocity.x = 200;
+    } else {
+        this.playerShip.body.velocity.x = 0;
+    }
     
 }
