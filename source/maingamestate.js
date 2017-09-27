@@ -5,6 +5,7 @@ mainGameState.preload = function() {
     console.log("Pre-loading the Game");
     this.game.load.image("space-bg", "assets/images/space2-bg.jpg");
     this.game.load.image("playership", "assets/images/alien4.png");
+    this.game.load.audio("gametheme", "assets/music/spacegametheme.mp3");
 }
 
 //add the create function 
@@ -26,6 +27,11 @@ mainGameState.create = function() {
     game.physics.arcade.enable(this.playerShip);
     
     this.cursors = game.input.keyboard.createCursorKeys();
+    
+    //Musics
+    this.music = game.add.audio('gametheme');
+    this.music.play();
+    this.music.loop = true;
     
 }
 
