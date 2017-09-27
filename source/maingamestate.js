@@ -6,7 +6,7 @@ mainGameState.preload = function() {
     this.game.load.image("space-bg", "assets/images/space2-bg.jpg");
     this.game.load.image("playership", "assets/images/alien4.png");
     this.game.load.audio("gametheme", "assets/music/spacegametheme.mp3");
-    this.game.load.image("asteriodsmall", "assets/images/asteroid-small-01.png");
+    this.game.load.image("asteroidsmall", "assets/images/asteroid-small-01.png");
 }
 
 //add the create function 
@@ -36,6 +36,7 @@ mainGameState.create = function() {
     
     //asteroids
     this.asteroidTimer = 2.0;
+    this.asteroids = game.add.group();
     
 }
 
@@ -57,20 +58,28 @@ mainGameState.update = function() {
     this.asteroidTimer -= game.time.physicsElapsed;
     
     if ( this.asteroidTimer <= 0.0) {
-        this.spawnAsteriod();
+        this.spawnAsteroid();
         this.asteroidTimer = 2.0;
     }
     
+    //clean up asteriods
+        //for loop that takes all the asteriods created from the group as an array, checks if
+        //asteriod is out of the set area, what we can see plus some, and if outside, delete.
+    for( var i = 0; i <this.asteroids.children.length; i++ ) {
+        if ( this.asteroids.children[i].y > (game.height + 200) ) {
+            this.asteroids.children[i].destroy();
+        }
+    }
 }
 
-//Spawning Asteriods
-mainGameState.spawnAsteriod = function() {
+//Creating/spawning Asteroids
+mainGameState.spawnAsteroid = function() {
     
-    //Create asteriod
     var x = game.rnd.integerInRange(0, game.width);
-    var asteriod = game.add.sprite(x, 0, 'asteriodsmall');
-    asteriod.anchor.setTo(0.5, 0.5);
-    game.physics.arcade.enable(asteriod);
-    asteriod.body.velocity.setTo(0, 100);
+    var asteroid = game.add.sprite(x, 0, 'asteroidsmall');
+    asteroid.anchor.setTo(0.5, 0.5);
+    game.physics.arcade.enable(asteroid);
+    asteroid.body.velocity.setTo(0, 100);
+    this.asteroids.add(asteroid);
     
 }
