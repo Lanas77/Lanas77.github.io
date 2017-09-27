@@ -38,6 +38,9 @@ mainGameState.create = function() {
     this.asteroidTimer = 2.0;
     this.asteroids = game.add.group();
     
+    //set firekey to Z 
+    this.fireKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+    
 }
 
 //Add the update function
@@ -69,6 +72,11 @@ mainGameState.update = function() {
         if ( this.asteroids.children[i].y > (game.height + 200) ) {
             this.asteroids.children[i].destroy();
         }
+    }
+    
+     //check if Z is being pressed
+    if ( this.fireKey.isDown ) {
+        console.log("NÅGON TRYCKER");
     }
 }
 
