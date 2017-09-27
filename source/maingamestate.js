@@ -44,9 +44,9 @@ mainGameState.update = function() {
     
     //move ship over the canavas
     
-    if (this.cursors.right.isDown) {
+    if (this.cursors.left.isDown) {
         this.playerShip.body.velocity.x = -200;
-    } else if (this.cursors.left.isDown) {
+    } else if (this.cursors.right.isDown) {
         this.playerShip.body.velocity.x = 200;
     } else {
         this.playerShip.body.velocity.x = 0;
@@ -71,6 +71,6 @@ mainGameState.spawnAsteriod = function() {
     var asteriod = game.add.sprite(x, 0, 'asteriodsmall');
     asteriod.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(asteriod);
-    asteriod.body.velocity.setTo(0, 200);
+    asteriod.body.velocity.setTo(0, 100);
     
 }
