@@ -7,6 +7,7 @@ mainGameState.preload = function() {
     this.game.load.image("playership", "assets/images/alien4.png");
     this.game.load.audio("gametheme", "assets/music/spacegametheme.mp3");
     this.game.load.image("asteroidsmall", "assets/images/asteroid-small-01.png");
+    this.game.load.image("firebullet", "assets/images/bullet-fire.png");
 }
 
 //add the create function 
@@ -77,6 +78,7 @@ mainGameState.update = function() {
      //check if Z is being pressed
     if ( this.fireKey.isDown ) {
         console.log("NÅGON TRYCKER");
+        this.spawnFireBullet();
     }
 }
 
@@ -90,4 +92,13 @@ mainGameState.spawnAsteroid = function() {
     asteroid.body.velocity.setTo(0, 100);
     this.asteroids.add(asteroid);
     
+}
+
+//Function for spawning bullets
+mainGameState.spawnFireBullet = function() {
+    var firebullet = game.add.sprite(this.playerShip.x,this.playerShip.y, 'firebullet');
+    firebullet.anchor.setTo(0.5, 0.5);
+    game.physics.arcade.enable(firebullet);
+    firebullet.body.velocity.setTo(0,-200);
+        
 }
