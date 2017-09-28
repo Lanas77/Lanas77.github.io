@@ -39,6 +39,9 @@ mainGameState.create = function() {
     this.asteroidTimer = 2.0;
     this.asteroids = game.add.group();
     
+    //bullets
+    this.firebullets = game.add.group();
+    
     //set firekey to Z 
     this.fireKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
     
@@ -64,6 +67,14 @@ mainGameState.update = function() {
     if ( this.asteroidTimer <= 0.0) {
         this.spawnAsteroid();
         this.asteroidTimer = 2.0;
+    }
+    
+    //clean up bullets
+    
+    for(var i = 0; i <this.firebullets.children.length; i++ ) {
+        if (this.firebullets.children[i].y < -100) {
+            this.firebullets.children[i].destroy();
+        }
     }
     
     //clean up asteriods
@@ -100,5 +111,6 @@ mainGameState.spawnFireBullet = function() {
     firebullet.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(firebullet);
     firebullet.body.velocity.setTo(0,-200);
+    this.firebullets.add(firebullet);
         
 }
