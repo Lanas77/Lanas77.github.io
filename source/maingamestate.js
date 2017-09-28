@@ -44,6 +44,7 @@ mainGameState.create = function() {
     //Move
     game.physics.startSystem(Phaser.Physics.ARCADE); 
     game.physics.arcade.enable(this.playerShip);
+    this.playerShip.body.immovable = true;
     
     this.cursors = game.input.keyboard.createCursorKeys();
     
@@ -80,7 +81,19 @@ mainGameState.create = function() {
     this.scoreValue = game.add.text(game.width * 0.85, 20, "0", TextStyle);
     this.scoreValue.fixedToCamera = true;
     
+    //Score Value at start
     this.playerScore = 0;
+    
+    //Player lives at start
+    this.playerLives = 3;
+    
+    //create text object for player lives
+    var TextStyle = {font: "16px Arial", fill: "#ffffff", align: "center"}
+    this.playerLivesTitle = game.add.text(game.width*0.70, 40, "Lives", TextStyle);
+    this.playerLivesTitle.fixedToCamera = true;
+    
+    this.playerLivesTotal = game.add.text(game.width*0.85, 40, "3", TextStyle);
+    this.playerLivesTotal.fixedToCamera = true;
     
 }
 
@@ -130,11 +143,17 @@ mainGameState.update = function() {
         console.log("NÅGON TRYCKER");
         this.spawnFireBullet();
     }
-    //check for collision
+    //check for collision asteroid - bullets
     game.physics.arcade.collide(this.asteroids, this.firebullets, this.onAsteroidBulletCollision, null, this);
     
     //update text label for player score
     this.scoreValue.setText(this.playerScore);
+    
+    //update text label for player lives
+    this.playerLivesTotal.setText(this.playerLives);
+    
+    //check for collision player - asteroid
+    game.physics.arcade.collide(this.playerShip, this.asteroids, this.onAsteroidPlayerCollision, null,this);
     
 }
 
@@ -165,7 +184,7 @@ mainGameState.spawnFireBullet = function() {
     }
 }
 
-//function for collisions
+//function for collisions asteroid - bullets
 //using object as it doesnt matter at this point both will be destroyed, different when //spaceschip vs something else
 mainGameState.onAsteroidBulletCollision = function(object1, object2){ 
     console.log ("collision!!!!!");
@@ -173,3 +192,14 @@ mainGameState.onAsteroidBulletCollision = function(object1, object2){
     object2.pendingDestroy = true;
     this.playerScore +=10;
 }
+
+//function for checking player - asteroid collision
+mainGameState.onAsteroidPlayerCollision = function (object1, object2){
+    if (object1.key.includes("asteroid") )  {
+        object1.pendingDestroy = true;
+    } else {
+        object2.pendingDestroy = true;
+        this.playerLives -=1;
+    }
+}
+    
