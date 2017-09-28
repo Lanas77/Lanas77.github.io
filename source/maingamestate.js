@@ -155,6 +155,11 @@ mainGameState.update = function() {
     //check for collision player - asteroid
     game.physics.arcade.collide(this.playerShip, this.asteroids, this.onAsteroidPlayerCollision, null,this);
     
+    //check if player is dead
+    if (this.playerLives <= 0) {
+        game.state.start("GameOver");
+    }
+    
 }
 
 //Creating/spawning Asteroids

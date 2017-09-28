@@ -15,6 +15,7 @@
         var game = new Phaser.Game(600, 600, Phaser.AUTO, 'gameContainer');             
         game.state.add("MainGame", mainGameState);
         game.state.start("MainGame");
+        game.state.add("GameOver", gameOverState);
     </script>
 
 </body>

@@ -1,7 +1,7 @@
-var gameoverstate = {}
+var gameOverState = {}
 
-gameoverstate.preload = function (); {
-    this.game.load.image("gameoverbg", "assets/images/gameover2.png");
+gameOverState.preload = function (){
+    this.game.load.image("gameoverbg", "assets/images/gameover.gif");
     
     
 }
@@ -9,7 +9,7 @@ gameoverstate.preload = function (); {
 
 
 
-gameoverstate.create = function (); {
+gameOverState.create = function () {
     this.game.add.sprite(0, 0, 'gameoverbg');
     
     
@@ -17,7 +17,7 @@ gameoverstate.create = function (); {
 
 
 
-gameoverstate.update = function () {
+gameOverState.update = function () {
     
     
     
