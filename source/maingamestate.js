@@ -71,6 +71,16 @@ mainGameState.create = function() {
     
     //set firekey to Z 
     this.fireKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+     
+    //create text object for player score
+    var TextStyle = {font: "16px Arial", fill: "#ffffff", align: "center"}
+    this.playerScoreTitle = game.add.text(game.width*0.70, 20, "Score", TextStyle);
+    this.playerScoreTitle.fixedToCamera = true;
+    
+    this.scoreValue = game.add.text(game.width * 0.85, 20, "0", TextStyle);
+    this.scoreValue.fixedToCamera = true;
+    
+    this.playerScore = 0;
     
 }
 
@@ -123,6 +133,9 @@ mainGameState.update = function() {
     //check for collision
     game.physics.arcade.collide(this.asteroids, this.firebullets, this.onAsteroidBulletCollision, null, this);
     
+    //update text label for player score
+    this.scoreValue.setText(this.playerScore);
+    
 }
 
 //Creating/spawning Asteroids
@@ -158,5 +171,5 @@ mainGameState.onAsteroidBulletCollision = function(object1, object2){
     console.log ("collision!!!!!");
     object1.pendingDestroy = true;
     object2.pendingDestroy = true;
-    
+    this.playerScore +=10;
 }
