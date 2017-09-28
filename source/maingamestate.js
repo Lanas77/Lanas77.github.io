@@ -8,6 +8,23 @@ mainGameState.preload = function() {
     this.game.load.audio("gametheme", "assets/music/spacegametheme.mp3");
     this.game.load.image("asteroidsmall", "assets/images/asteroid-small-01.png");
     this.game.load.image("firebullet", "assets/images/bullet-fire.png");
+    this.game.load.audio("asteroid_hit1", "assets/audio/asteroid_hit_01.mp3");
+    this.game.load.audio("asteroid_hit2", "assets/audio/asteroid_hit_02.mp3");
+    this.game.load.audio("asteroid_hit3", "assets/audio/asteroid_hit_03.mp3");
+    this.game.load.audio("asteroid_hit4", "assets/audio/asteroid_hit_04.mp3");
+    this.game.load.audio("asteroid_hit5", "assets/audio/asteroid_hit_05.mp3");
+    this.game.load.audio("asteroid_hit6", "assets/audio/asteroid_hit_06.mp3");
+    this.game.load.audio("player_fire1", "assets/audio/player_fire_01.mp3");
+    this.game.load.audio("player_fire2", "assets/audio/player_fire_02.mp3");
+    this.game.load.audio("player_fire3", "assets/audio/player_fire_03.mp3");
+    this.game.load.audio("player_fire4", "assets/audio/player_fire_04.mp3");
+    this.game.load.audio("player_fire5", "assets/audio/player_fire_05.mp3");
+    this.game.load.audio("player_fire6", "assets/audio/player_fire_06.mp3");
+    this.game.load.audio("asteroid_death1", "assets/audio/asteroid_death_01.mp3");
+    this.game.load.audio("asteroid_death2", "assets/audio/asteroid_death_02.mp3");
+    this.game.load.audio("asteroid_death3", "assets/audio/asteroid_death_03.mp3");
+    this.game.load.audio("player_hit", "assets/audio/player_hit_01.mp3");
+    this.game.load.audio("player_death", "assets/audio/player_death_01.mp3");
 }
 
 //add the create method 
@@ -30,10 +47,19 @@ mainGameState.create = function() {
     
     this.cursors = game.input.keyboard.createCursorKeys();
     
-    //Musics
+    //Musics in the bg
     this.music = game.add.audio('gametheme');
     //this.music.play();
     //this.music.loop = true;
+    
+    //SFX
+    this.playerFireSfx = [];
+    this.playerFireSfx.push(game.add.audio("player_fire1"));
+    this.playerFireSfx.push(game.add.audio("player_fire2"));
+    this.playerFireSfx.push(game.add.audio("player_fire3"));
+    this.playerFireSfx.push(game.add.audio("player_fire4"));
+    this.playerFireSfx.push(game.add.audio("player_fire5"));
+    this.playerFireSfx.push(game.add.audio("player_fire6"));
     
     //asteroids
     this.asteroidTimer = 2.0;
@@ -121,7 +147,8 @@ mainGameState.spawnFireBullet = function() {
     game.physics.arcade.enable(firebullet);
     firebullet.body.velocity.setTo(0,-200);
     this.firebullets.add(firebullet);
-        
+    var sfxindex = game.rnd.integerInRange(0, 5);
+    this.playerFireSfx[sfxindex].play();
     }
 }
 
