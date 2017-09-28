@@ -94,6 +94,9 @@ mainGameState.update = function() {
         console.log("NÅGON TRYCKER");
         this.spawnFireBullet();
     }
+    //check for collision
+    game.physics.arcade.collide(this.asteroids, this.firebullets, this.onAsteroidBulletCollision, null, this);
+    
 }
 
 //Creating/spawning Asteroids
@@ -111,7 +114,7 @@ mainGameState.spawnAsteroid = function() {
 //Function for spawning bullets
 mainGameState.spawnFireBullet = function() {
     if (this.fireTimer < 0) {
-        this.fireTimer = 1.0;
+        this.fireTimer = 0.5;
     
     var firebullet = game.add.sprite(this.playerShip.x,this.playerShip.y, 'firebullet');
     firebullet.anchor.setTo(0.5, 0.5);
@@ -120,4 +123,11 @@ mainGameState.spawnFireBullet = function() {
     this.firebullets.add(firebullet);
         
     }
+}
+
+//function for collisions
+mainGameState.onAsteroidBulletCollision = function(object1, object2){
+    console.log ("collision!!!!!");
+    //check for collisions
+
 }
