@@ -126,8 +126,10 @@ mainGameState.spawnFireBullet = function() {
 }
 
 //function for collisions
-mainGameState.onAsteroidBulletCollision = function(object1, object2){
+//using object as it doesnt matter at this point both will be destroyed, different when //spaceschip vs something else
+mainGameState.onAsteroidBulletCollision = function(object1, object2){ 
     console.log ("collision!!!!!");
-    //check for collisions
-
+    object1.pendingDestroy = true;
+    object2.pendingDestroy = true;
+    
 }
