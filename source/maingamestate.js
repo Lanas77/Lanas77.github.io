@@ -10,7 +10,7 @@ mainGameState.preload = function() {
     this.game.load.image("firebullet", "assets/images/bullet-fire.png");
 }
 
-//add the create function 
+//add the create method 
 mainGameState.create = function() {
     
     var x = game.width * 0.5;
@@ -41,13 +41,14 @@ mainGameState.create = function() {
     
     //bullets
     this.firebullets = game.add.group();
+    this.fireTimer = 2.0;
     
     //set firekey to Z 
     this.fireKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
     
 }
 
-//Add the update function
+//Add the update method
 mainGameState.update = function() {
     
     //move ship over the canavas
@@ -60,7 +61,7 @@ mainGameState.update = function() {
         this.playerShip.body.velocity.x = 0;
     }
     
-    //asteroids spawn every 2 seconds
+    //limit asteroids spawn - every 2 seconds
     
     this.asteroidTimer -= game.time.physicsElapsed;
     
@@ -69,7 +70,9 @@ mainGameState.update = function() {
         this.asteroidTimer = 2.0;
     }
     
+    
     //clean up bullets
+    this.fireTimer -= game.time.physicsElapsed;
     
     for(var i = 0; i <this.firebullets.children.length; i++ ) {
         if (this.firebullets.children[i].y < -100) {
@@ -86,7 +89,7 @@ mainGameState.update = function() {
         }
     }
     
-     //check if Z is being pressed
+     //check if Z is being pressed - shoot
     if ( this.fireKey.isDown ) {
         console.log("NÅGON TRYCKER");
         this.spawnFireBullet();
@@ -107,10 +110,14 @@ mainGameState.spawnAsteroid = function() {
 
 //Function for spawning bullets
 mainGameState.spawnFireBullet = function() {
+    if (this.fireTimer < 0) {
+        this.fireTimer = 1.0;
+    
     var firebullet = game.add.sprite(this.playerShip.x,this.playerShip.y, 'firebullet');
     firebullet.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(firebullet);
     firebullet.body.velocity.setTo(0,-200);
     this.firebullets.add(firebullet);
         
+    }
 }
