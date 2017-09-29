@@ -146,7 +146,6 @@ mainGameState.update = function() {
     
      //check if Z is being pressed - shoot
     if ( this.fireKey.isDown ) {
-        console.log("NÅGON TRYCKER");
         this.spawnFireBullet();
     }
     //check for collision asteroid - bullets
@@ -166,6 +165,12 @@ mainGameState.update = function() {
         game.state.start("GameOver");
     }
     
+    //check if player won level
+     if (this.playerScore >= 10) {
+        game.state.start("Winner");
+    }
+    
+    
 }
 
 //Creating/spawning Asteroids
@@ -175,7 +180,9 @@ mainGameState.spawnAsteroid = function() {
     var asteroid = game.add.sprite(x, 0, 'asteroidsmall');
     asteroid.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(asteroid);
-    //asteroid.body.velocity.setTo(0, 100);
+    //all asteroids spawn with equal velocity
+    //asteroid.body.velocity.setTo(0, 100); 
+    //random velocity 
     asteroid.body.velocity.y= this.rnd.integerInRange(100, 0);
     this.asteroids.add(asteroid);
     
