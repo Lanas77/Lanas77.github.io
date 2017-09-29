@@ -25,6 +25,7 @@ mainGameState.preload = function() {
     this.game.load.audio("asteroid_death3", "assets/audio/asteroid_death_03.mp3");
     this.game.load.audio("player_hit", "assets/audio/player_hit_01.mp3");
     this.game.load.audio("player_death", "assets/audio/player_death_01.mp3");
+    this.game.load.image("starfield", "assets/images/starfield.jpg");
 }
 
 //add the create method 
