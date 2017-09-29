@@ -25,7 +25,7 @@ mainGameState.preload = function() {
     this.game.load.audio("asteroid_death3", "assets/audio/asteroid_death_03.mp3");
     this.game.load.audio("player_hit", "assets/audio/player_hit_01.mp3");
     this.game.load.audio("player_death", "assets/audio/player_death_01.mp3");
-    this.game.load.image("starfield", "assets/images/starfield.jpg");
+    this.game.load.image("starfieldbg", "assets/images/starfield.jpg");
 }
 
 //add the create method 
@@ -35,7 +35,8 @@ mainGameState.create = function() {
     var y = game.height * 0.95;
    
     //Background
-    this.game.add.sprite(-100, -200, 'space-bg');
+    //this.game.add.sprite(-100, -200, 'space-bg');
+    tileSprite = game.add.tileSprite(0, 0, 800, 600, 'starfieldbg');
 
     //Spaceship
     this.playerShip = game.add.sprite(x, y, 'playership');
@@ -100,6 +101,9 @@ mainGameState.create = function() {
 
 //Add the update method
 mainGameState.update = function() {
+    
+    //repeat tile bg
+    tileSprite.tilePosition.y += 1;
     
     //move ship over the canavas
     
