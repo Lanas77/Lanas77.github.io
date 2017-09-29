@@ -97,6 +97,8 @@ mainGameState.create = function() {
     this.playerLivesTotal = game.add.text(game.width*0.85, 40, "3", TextStyle);
     this.playerLivesTotal.fixedToCamera = true;
     
+    this.asteroidTimerMax = 2.0
+    
 }
 
 //Add the update method
@@ -115,13 +117,12 @@ mainGameState.update = function() {
         this.playerShip.body.velocity.x = 0;
     }
     
-    //limit asteroids spawn - every 2 seconds
+    // asteroids spawn
     
     this.asteroidTimer -= game.time.physicsElapsed;
-    
     if ( this.asteroidTimer <= 0.0) {
         this.spawnAsteroid();
-        this.asteroidTimer = 2.0;
+        this.asteroidTimer = this.asteroidTimerMax;
     }
     
     
@@ -174,7 +175,8 @@ mainGameState.spawnAsteroid = function() {
     var asteroid = game.add.sprite(x, 0, 'asteroidsmall');
     asteroid.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(asteroid);
-    asteroid.body.velocity.setTo(0, 100);
+    //asteroid.body.velocity.setTo(0, 100);
+    asteroid.body.velocity.y= this.rnd.integerInRange(100, 0);
     this.asteroids.add(asteroid);
     
 }
