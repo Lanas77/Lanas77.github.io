@@ -97,7 +97,7 @@ mainGameState.create = function() {
     this.playerLivesTotal = game.add.text(game.width*0.85, 40, "3", TextStyle);
     this.playerLivesTotal.fixedToCamera = true;
     
-    this.timePerAsteroid = 2.0;
+    this.asteroidTimer = 2.0;
     
 }
 
@@ -124,7 +124,7 @@ mainGameState.update = function() {
         this.spawnAsteroid();
         this.asteroidTimer = this.timePerAsteroid;
     }
-    
+
     
     //clean up bullets
     this.fireTimer -= game.time.physicsElapsed;
@@ -170,8 +170,6 @@ mainGameState.update = function() {
         game.state.start("Winner");
     }
     
-    
-}
 
 //Creating/spawning Asteroids
 mainGameState.spawnAsteroid = function() {
@@ -221,4 +219,5 @@ mainGameState.onAsteroidPlayerCollision = function (object1, object2){
         this.playerLives -=1;
     }
 }
+
     
