@@ -15,18 +15,16 @@ winnerGameState.create = function () {
 
 	WinnerTitle = game.add.text(game.width * 0.3, 40, "YOU WON!", textStyle1);
 
-    WinnerText = game.add.text(game.width *0.15,130, "Wanna play again? Click any key", textStyle2);
+    WinnerText = game.add.text(game.width *0.15,130, "Wanna play again? Click the 'Q' key", textStyle2);
 }
 
 
 winnerGameState.update = function () {
     
-    //var startoverkey = "Q"
-   // if (startoverkey = true){
-        //game.state.start("MainGame");
-   // } else {
-       // null
-   // }
+    this.startOverKey = game.input.keyboard.addKey(Phaser.Keyboard.Q);
+    if (this.startOverKey.isDown){
+        game.state.start("MainGame");
+    }
     
     
 }

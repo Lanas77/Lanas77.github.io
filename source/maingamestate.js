@@ -97,7 +97,7 @@ mainGameState.create = function() {
     this.playerLivesTotal = game.add.text(game.width*0.85, 40, "3", TextStyle);
     this.playerLivesTotal.fixedToCamera = true;
     
-    this.asteroidTimerMax = 2.0
+    this.timePerAsteroid = 2.0;
     
 }
 
@@ -122,7 +122,7 @@ mainGameState.update = function() {
     this.asteroidTimer -= game.time.physicsElapsed;
     if ( this.asteroidTimer <= 0.0) {
         this.spawnAsteroid();
-        this.asteroidTimer = this.asteroidTimerMax;
+        this.asteroidTimer = this.timePerAsteroid;
     }
     
     
