@@ -193,7 +193,7 @@ mainGameState.spawnFireBullet = function() {
     if (this.fireTimer < 0) {
         this.fireTimer = 0.5;
     
-    var firebullet = game.add.sprite(this.playerShip.x,this.playerShip.y, 'firebullet');
+    var firebullet = game.add.sprite(this.playerShip.x,(this.playerShip.y-55), 'firebullet');
     firebullet.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(firebullet);
     firebullet.body.velocity.setTo(0,-200);
