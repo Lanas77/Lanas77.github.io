@@ -122,7 +122,7 @@ mainGameState.update = function() {
     this.asteroidTimer -= game.time.physicsElapsed;
     if ( this.asteroidTimer <= 0.0) {
         this.spawnAsteroid();
-        this.asteroidTimer = this.timePerAsteroid;
+        this.asteroidTimer = 2.0;
     }
 
     
@@ -169,7 +169,7 @@ mainGameState.update = function() {
      if (this.playerScore >= 10) {
         game.state.start("Winner");
     }
-    
+}
 
 //Creating/spawning Asteroids
 mainGameState.spawnAsteroid = function() {
