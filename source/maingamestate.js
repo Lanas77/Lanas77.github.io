@@ -52,8 +52,8 @@ mainGameState.create = function() {
     
     //Musics in the bg
     this.music = game.add.audio('gametheme');
-    //this.music.play();
-    //this.music.loop = true;
+    this.music.play();
+    this.music.loop = true;
     
     //SFX
     this.playerFireSfx = [];
@@ -110,9 +110,9 @@ mainGameState.update = function() {
     //move ship over the canavas
     
     if (this.cursors.left.isDown) {
-        this.playerShip.body.velocity.x = -200;
+        this.playerShip.body.velocity.x = -250;
     } else if (this.cursors.right.isDown) {
-        this.playerShip.body.velocity.x = 200;
+        this.playerShip.body.velocity.x = 250;
     } else {
         this.playerShip.body.velocity.x = 0;
     }
@@ -166,7 +166,7 @@ mainGameState.update = function() {
     }
     
     //check if player won level
-     if (this.playerScore >= 10) {
+     if (this.playerScore >= 50) {
         game.state.start("Winner");
     }
 }
@@ -194,7 +194,7 @@ mainGameState.spawnFireBullet = function() {
     var firebullet = game.add.sprite(this.playerShip.x,this.playerShip.y, 'firebullet');
     firebullet.anchor.setTo(0.5, 0.5);
     game.physics.arcade.enable(firebullet);
-    firebullet.body.velocity.setTo(0,-200);
+    firebullet.body.velocity.setTo(0,-300);
     this.firebullets.add(firebullet);
     var sfxindex = game.rnd.integerInRange(0, 5);
     this.playerFireSfx[sfxindex].play();
